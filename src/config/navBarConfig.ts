@@ -8,6 +8,7 @@ import { devicesConfig } from "@/config/devicesConfig";
 import { friendsConfig } from "@/config/friendsConfig";
 import { gamesConfig } from "@/config/gamesConfig";
 import { momentsConfig } from "@/config/momentsConfig";
+import { novelConfig } from "@/config/novelConfig";
 import { projectsConfig } from "@/config/projectsConfig";
 import { seriesConfig } from "@/config/seriesConfig";
 import { skillsConfig } from "@/config/skillsConfig";
@@ -61,6 +62,12 @@ export const LinkPresets: Record<string, NavBarLink> = {
 		url: "/anime/",
 		icon: "material-symbols:live-tv-outline-rounded",
 		pageKey: "anime",
+	},
+	Novel: {
+		name: i18n(I18nKey.novel),
+		url: "/novel/",
+		icon: "material-symbols:menu-book-rounded",
+		pageKey: "novel",
 	},
 	Compass: {
 		name: i18n(I18nKey.compass),
@@ -186,6 +193,7 @@ const unavailableFeatureRoutes: ReadonlySet<string> = new Set([
 	...(friendsConfig.enable ? [] : ["/friends"]),
 	...(momentsConfig.enable ? [] : ["/moments"]),
 	...(animeConfig.enable ? [] : ["/anime"]),
+	...(novelConfig.enable ? [] : ["/novel"]),
 	...(compassConfig.enable ? [] : ["/compass"]),
 	...(albumsConfig.enable ? [] : ["/albums"]),
 	...(skillsConfig.enable ? [] : ["/skills"]),

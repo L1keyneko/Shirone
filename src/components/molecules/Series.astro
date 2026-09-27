@@ -34,6 +34,8 @@ interface SeriesItem {
 	title: string;
 	count: number;
 	latest: Date | null;
+	/** 系列图标（可空 = 未配置，侧栏按「不显示图标」处理） */
+	icon: string;
 }
 
 // 功能关闭时短路：不查集合、不产出 DOM
@@ -56,6 +58,7 @@ const seriesItems: SeriesItem[] = !catalog
 					title: entity.data.title,
 					count: members.length,
 					latest,
+					icon: (entity.data.icon ?? "").trim(),
 				};
 			})
 			.sort((a, b) => (b.latest?.getTime() ?? 0) - (a.latest?.getTime() ?? 0));
@@ -64,6 +67,7 @@ const visibleItems = seriesItems.slice(0, DISPLAY_LIMIT).map((item) => ({
 	name: item.title.trim(),
 	href: getSeriesUrl(item.slug),
 	count: item.count,
+	icon: item.icon || undefined,
 }));
 const hasOverflow = seriesItems.length > DISPLAY_LIMIT;
 ---

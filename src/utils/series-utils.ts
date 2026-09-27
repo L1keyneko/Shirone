@@ -12,17 +12,69 @@ export function normaliseSeriesSlug(raw: string | null | undefined): string {
 	return (raw ?? "").trim();
 }
 
+/** 系列未配置 icon 时的回退图标：索引页与详情页页头用实心变体。 */
+export const SERIES_FALLBACK_ICON = "material-symbols:auto-stories-rounded";
+
+/** 文章内系列卡的回退图标：沿用描边变体（保持既有视觉）。 */
+export const SERIES_FALLBACK_ICON_OUTLINE =
+	"material-symbols:auto-stories-outline-rounded";
+
+/**
+ * 系列 icon 的唯一解析点：空白值回退到主题默认图标。
+ * @param icon 系列 frontmatter 的 icon（可为空或缺省）
+ * @param variant `filled` = 索引页/详情页页头；`outline` = 文章内系列卡
+ */
+export function resolveSeriesIcon(
+	icon: string | null | undefined,
+	variant: "filled" | "outline" = "filled",
+): string {
+	const trimmed = (icon ?? "").trim();
+	if (trimmed) return trimmed;
+	return variant === "outline"
+		? SERIES_FALLBACK_ICON_OUTLINE
+		: SERIES_FALLBACK_ICON;
+}
+
+/**
+ * 系列「计数文案」的唯一解析点（详情页副标题与索引页卡片 meta 共用）。
+ * frontmatter 的 `subtitle` 作为模板，仅 `{count}`（系列内篇数）会被替换；
+ * 留空（含仅空白）时回退到默认文案「N 篇文章」。状态不参与模板——
+ * 详情页由调用方拼成「状态 · {计数文案}」，索引页卡片只显示计数文案。
+ * @param template 系列 frontmatter 的 subtitle（可为空或缺省）
+ * @param values.count 系列内文章数
+ * @param values.countLabel 已本地化的计数单位（如「篇文章」）
+ */
+export function resolveSeriesSubtitle(
+	template: string | null | undefined,
+	values: { count: number; countLabel: string },
+): string {
+	const trimmed = (template ?? "").trim();
+	if (!trimmed) {
+		return `${values.count} ${values.countLabel}`;
+	}
+	return trimmed.replaceAll("{count}", String(values.count));
+}
+
 export interface SeriesPostRef {
 	slug: string;
 	title: string;
 }
 
+/**
+ * 系列状态（必须与 content.config.ts 的 series schema 枚举保持一致）。
+ * 状态 → 展示词条的映射在 `@utils/series-status`：本模块会被 `node --test`
+ * 直接导入，不能引入含运行时 `enum` 的模块（见 docs/ci-and-node-tests.md）。
+ */
+export type SeriesStatus = "ongoing" | "completed" | "progressing" | "released";
+
 export interface SeriesContext {
 	/** 系列 slug（集合条目 id） */
 	slug: string;
 	title: string;
-	status: "ongoing" | "completed";
+	status: SeriesStatus;
 	defaultCategory: string;
+	/** 系列图标（frontmatter 原值；空白 = 未配置，展示层用 resolveSeriesIcon 回退） */
+	icon: string;
 	/** 系列内文章，按阅读顺序 */
 	posts: SeriesPostRef[];
 	total: number;
@@ -170,6 +222,7 @@ export function buildSeriesContexts(
 				title: entity.data.title,
 				status: entity.data.status,
 				defaultCategory: entity.data.defaultCategory,
+				icon: (entity.data.icon ?? "").trim(),
 				posts: refs,
 				total: refs.length,
 				index: index + 1,

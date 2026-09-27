@@ -23,11 +23,14 @@ import { onMount } from "svelte";
 let {
 	moments = [] as MomentItem[],
 	author = { name: "", avatar: "", url: "/about/" } as MomentAuthor,
+	/** 逐条动态的作者覆盖（键为 moment id；未提供的条目回退 `author`） */
+	authorOverrides = {} as Record<string, MomentAuthor>,
 	title = i18n(I18nKey.moments),
 	subtitle = i18n(I18nKey.momentsBanner),
 }: {
 	moments?: MomentItem[];
 	author?: MomentAuthor;
+	authorOverrides?: Record<string, MomentAuthor>;
 	title?: string;
 	subtitle?: string;
 } = $props();
@@ -187,7 +190,11 @@ onMount(() => {
 		{#key `${query}|${selectedTag}`}
 			<div class="moment-section__list">
 				{#each visibleMoments as moment, i (moment.id)}
-					<MomentCard {moment} {author} delay={Math.min(i, 7) * 45} />
+					<MomentCard
+						{moment}
+						author={authorOverrides[moment.id] ?? author}
+						delay={Math.min(i, 7) * 45}
+					/>
 				{/each}
 			</div>
 		{/key}

@@ -1,7 +1,12 @@
 ---
 import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
-import type { SeriesPostContext, SeriesPostRef } from "@utils/series-utils";
+import { SERIES_STATUS_I18N_KEYS } from "@utils/series-status";
+import {
+	resolveSeriesIcon,
+	type SeriesPostContext,
+	type SeriesPostRef,
+} from "@utils/series-utils";
 import { getPostUrlBySlug, getSeriesUrl } from "@utils/url-utils";
 import { Icon } from "astro-icon/components";
 
@@ -22,10 +27,7 @@ const { context, class: className = "" } = Astro.props;
 
 // `seriesPart` 的 `{index}` / `{total}` 在 10 种语言中同名；这里给数字加粗
 const partMessage = i18n(I18nKey.seriesPart).split(/(\{index\}|\{total\})/g);
-const statusLabel =
-	context.status === "completed"
-		? i18n(I18nKey.seriesStatusCompleted)
-		: i18n(I18nKey.seriesStatusOngoing);
+const statusLabel = i18n(SERIES_STATUS_I18N_KEYS[context.status]);
 
 const headingId = `series-card-title-${context.slug}`;
 // 相邻篇章与前/后位次一一对应，可直接由当前位置换算
@@ -68,7 +70,7 @@ const directionLabel = {
 >
 	<header class="series-card__head">
 		<div class="series-card__lane">
-			<Icon name="material-symbols:auto-stories-outline-rounded" />
+			<Icon name={resolveSeriesIcon(context.icon, "outline")} />
 			<h2 class="series-card__title" id={headingId}>
 				<a class="series-card__link m3-state-layer" href={getSeriesUrl(context.slug)}>
 					{context.title}
@@ -199,6 +201,16 @@ const directionLabel = {
 		&--ongoing
 			background: var(--primary-container)
 			color: var(--on-primary-container)
+
+		/* 进行中：与连载中同为 primary tonal（按站点偏好统一） */
+		&--progressing
+			background: var(--primary-container)
+			color: var(--on-primary-container)
+
+		/* 已发布：secondary tonal，表示「已公开的成品」 */
+		&--released
+			background: var(--surface-container-highest)
+			color: var(--on-surface-variant)
 
 		/* 已完结是「沉淀」状态：用中性容器，避免抢走正文/续读的注意力 */
 		&--completed

@@ -61,7 +61,7 @@ shirone-content/
 │   └── spec/                   # 特殊页面
 ├── data/                       # 结构化数据（映射至 src/data/）
 │   ├── projects.ts  skills.ts  timeline.ts  devices.ts
-│   ├── friends.ts   compass.ts music.ts     anime.ts
+│   ├── friends.ts   compass.ts music.ts     anime.ts  novel.ts
 │   ├── games.ts
 │   └── anime-snapshots/        # 番剧数据快照基线（可选；anime:sync 会覆盖 <provider>.json）
 ├── assets/                     # 高清原始图片（映射至 src/assets/，参与构建期压缩转码）

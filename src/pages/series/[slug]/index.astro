@@ -23,8 +23,11 @@ import { getMarkdownStylesheetAssets } from "@utils/markdown-assets";
 import {
 	normaliseSeriesSlug,
 	orderSeriesMembers,
+	resolveSeriesIcon,
+	resolveSeriesSubtitle,
 	type SeriesMemberInput,
 } from "@utils/series-utils";
+import { SERIES_STATUS_I18N_KEYS } from "@utils/series-status";
 import { url } from "@utils/url-utils";
 
 export async function getStaticPaths() {
@@ -56,11 +59,13 @@ const members: SeriesMemberInput[] = posts
 	}));
 const ordered = orderSeriesMembers(members);
 
-const statusLabel =
-	series.data.status === "completed"
-		? i18n(I18nKey.seriesStatusCompleted)
-		: i18n(I18nKey.seriesStatusOngoing);
-const subtitle = `${statusLabel} · ${ordered.length} ${i18n(I18nKey.postsCount)}`;
+const statusLabel = i18n(SERIES_STATUS_I18N_KEYS[series.data.status]);
+const countText = resolveSeriesSubtitle(series.data.subtitle, {
+	count: ordered.length,
+	countLabel: i18n(I18nKey.postsCount),
+});
+// 副标题 = 状态 + 计数文案；计数文案可在系列 frontmatter 的 subtitle 中自定义
+const subtitle = `${statusLabel} · ${countText}`;
 ---
 
 <MainGridLayout title={series.data.title} description={subtitle} page="series">
@@ -69,7 +74,7 @@ const subtitle = `${statusLabel} · ${ordered.length} ${i18n(I18nKey.postsCount)
 	))}
 	<Card color="var(--card-bg)" radius="l" class="series-detail px-8 py-6">
 		<PageHeader
-			icon="material-symbols:auto-stories-rounded"
+			icon={resolveSeriesIcon(series.data.icon, "filled")}
 			title={series.data.title}
 			subtitle={subtitle}
 		/>

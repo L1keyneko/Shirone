@@ -201,6 +201,12 @@ export type MomentItem = {
 	/** 正文 HTML（站点统一 markdown 插件链渲染） */
 	html: string;
 	pinned: boolean;
+	/** 发布人名称（空 = 回退 profileConfig.name） */
+	author: string;
+	/** 头像地址（空 = 回退 profileConfig.avatar） */
+	authorAvatar: string;
+	/** 名称下方的小签名（空 = 不渲染） */
+	statusMessage: string;
 	location: string;
 	/** 心情 Iconify 图标名 */
 	mood: string;
@@ -264,6 +270,9 @@ export async function getSortedMoments(): Promise<MomentItem[]> {
 				published: new Date(entry.data.published).toISOString(),
 				html: code,
 				pinned: entry.data.pinned,
+				author: entry.data.author,
+				authorAvatar: entry.data.authorAvatar,
+				statusMessage: entry.data.statusMessage.trim(),
 				location: entry.data.location,
 				mood: entry.data.mood,
 				tags: entry.data.tags,

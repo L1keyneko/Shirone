@@ -135,6 +135,10 @@ export const iconInclude: NonNullable<
 	"fa6-brands": ["*"],
 	"fa6-regular": ["*"],
 	"fa6-solid": ["*"],
+	// 站点自定义新增的图标集：必须与 scripts/icons/generate-local-icons.mjs 的
+	// `iconPrefixes` 白名单成对登记，否则 Svelte 端离线集合会静默缺数据。
+	"lucide": ["*"],
+	"ri": ["*"],
 };
 
 /**

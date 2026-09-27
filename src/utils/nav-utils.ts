@@ -29,6 +29,8 @@ function normalizeNavRoute(url: string | undefined): string | null {
  * （站内路由、去尾斜杠）；关闭的功能页面会重定向到 `/404/`，导航不得保留死链。
  * 纯分组（自身无 `url`，只作为下拉容器）的子项被全部裁掉时整组隐藏，
  * 避免留下点不开的空下拉。
+ * 分组自身带 `url` 且该页面已关闭时：保留分组与子项，只摘掉分组自身的链接，
+ * 渲染层会在无 `url` 时回退为纯展开按钮，因此不会留下「标签可点却 404」。
  */
 export function pruneUnavailableNavLinks(
 	links: ResolvedNavBarLink[],
@@ -45,6 +47,11 @@ export function pruneUnavailableNavLinks(
 
 		const route = normalizeNavRoute(link.url);
 		if (route !== null && route !== "/" && unavailableRoutes.has(route)) {
+			if (children && children.length > 0) {
+				const withoutUrl: ResolvedNavBarLink = { ...link, children };
+				delete withoutUrl.url;
+				kept.push(withoutUrl);
+			}
 			continue;
 		}
 
@@ -82,6 +89,7 @@ export function resolvePageKey(
 	if (pathname === "/friends") return "friends";
 	if (pathname === "/moments") return "moments";
 	if (pathname === "/anime") return "anime";
+	if (pathname === "/novel") return "novel";
 	if (pathname === "/compass") return "compass";
 	if (pathname === "/skills") return "skills";
 	if (pathname === "/projects") return "projects";

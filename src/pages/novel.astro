@@ -1,0 +1,25 @@
+---
+/**
+ * 小说作品页：数据经 utils/novel-data（本地数据源归一化，构建期同步取数，
+ * 无外部请求/快照/降级回退）取得后交给客户端岛渲染（筛选/过渡/加载更多均为交互态）。
+ */
+import NovelSection from "@components/organisms/NovelSection.svelte";
+import I18nKey from "@i18n/i18nKey";
+import MainGridLayout from "@layouts/MainGridLayout.astro";
+import { novelConfig } from "@/config/novelConfig";
+import { resolveI18nText } from "@utils/i18n-utils";
+import { getNovelList } from "../utils/novel-data";
+
+if (!novelConfig.enable) {
+	return Astro.redirect("/404/");
+}
+
+const pageTitle = resolveI18nText(novelConfig.title, I18nKey.novel);
+const pageDescription = resolveI18nText(novelConfig.description, I18nKey.novelBanner);
+
+const novels = getNovelList();
+---
+
+<MainGridLayout title={pageTitle} description={pageDescription} page="novel">
+    <NovelSection novels={novels} title={pageTitle} subtitle={pageDescription} client:visible></NovelSection>
+</MainGridLayout>

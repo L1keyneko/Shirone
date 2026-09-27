@@ -25,7 +25,9 @@ export type NavBarConfig = {
  * `NavBarLink`。三种写法：
  * - `{ preset: "Home" }`：引用主题内置预设，可再带同名字段做局部覆盖；
  * - `{ name, url, icon }`：完全自定义的链接；
- * - `{ name, icon, children }`：下拉分组，children 递归使用同一套写法。
+ * - `{ name, icon, children }`：下拉分组，children 递归使用同一套写法；
+ * - `{ name, url, icon, children }`：分组自身也可导航——标签是链接、右侧箭头
+ *   单独负责展开；未写 `url` 时整块仍是展开按钮（与旧版交互一致）。
  *
  * `name` 支持 `"$t:home"` 形式引用 i18n 词条，其余按字面量处理。
  */

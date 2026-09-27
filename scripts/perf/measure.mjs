@@ -10,6 +10,7 @@ const TEST_PAGES = [
 	{ name: "Friends", path: "/friends/" },
 	{ name: "Projects", path: "/projects/" },
 	{ name: "Anime", path: "/anime/" },
+	{ name: "Novel", path: "/novel/" },
 	{ name: "Moments", path: "/moments/" },
 	{ name: "Archive", path: "/archive/" },
 ];

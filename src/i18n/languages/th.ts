@@ -44,6 +44,16 @@ export const th: Translation = {
 	[Key.animeConfigMissingBilibili]: "ยังไม่ได้กำหนดค่า UID ของ Bilibili",
 	[Key.animeSyncEmpty]: "ไม่พบบันทึกอนิเมะในแหล่งข้อมูลนี้",
 
+	[Key.novel]: "นิยาย",
+	[Key.novelBanner]: "นิยายที่กำลังเขียนและเขียนจบแล้ว",
+	[Key.novelNoResults]: "ไม่พบนิยายที่ตรงเงื่อนไข",
+	[Key.novelCounts]: "{count} เรื่อง",
+	[Key.novelStatusOngoing]: "กำลังดำเนินอยู่",
+	[Key.novelStatusCompleted]: "จบแล้ว",
+	[Key.novelStatusReleased]: "เผยแพร่แล้ว",
+	[Key.novelAuthor]: "ผู้เขียน",
+	[Key.novelProgress]: "ความคืบหน้า",
+
 	[Key.compass]: "เข็มทิศ",
 	[Key.compassBanner]: "เว็บไซต์ที่ฉันกลับมาใช้บ่อย — เครื่องมือพัฒนา เอกสาร และหลุมกระต่าย",
 	[Key.compassNoResults]: "ไม่พบเว็บไซต์ที่ตรงกับคำค้นหา",
@@ -148,6 +158,8 @@ export const th: Translation = {
 	[Key.seriesCounts]: "ซีรีส์",
 	[Key.seriesStatusOngoing]: "กำลังดำเนินอยู่",
 	[Key.seriesStatusCompleted]: "เสร็จสมบูรณ์",
+	[Key.seriesStatusProgressing]: "กำลังดำเนินการ",
+	[Key.seriesStatusReleased]: "เผยแพร่แล้ว",
 	[Key.seriesPartOf]: "บทความนี้เป็นส่วนหนึ่งของซีรีส์",
 	[Key.seriesPart]: "ตอนที่ {index} จาก {total}",
 	[Key.seriesPrevInSeries]: "ตอนก่อนหน้าในซีรีส์",
@@ -212,6 +224,7 @@ export const th: Translation = {
 
 	[Key.sidebar]: "แถบด้านข้าง",
 	[Key.sidebarSecondary]: "แถบด้านข้างรอง",
+	[Key.navGroupExpand]: "เปิดเมนูย่อย",
 	[Key.musicPlayerTitle]: "เครื่องเล่นเพลง",
 	[Key.musicPrevious]: "เพลงก่อนหน้า",
 	[Key.musicPlay]: "เล่น",

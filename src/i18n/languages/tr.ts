@@ -46,6 +46,16 @@ export const tr: Translation = {
 	[Key.animeConfigMissingBilibili]: "Bilibili UID yapılandırılmadı",
 	[Key.animeSyncEmpty]: "Bu veri kaynağında anime öğesi bulunamadı",
 
+	[Key.novel]: "Romanlar",
+	[Key.novelBanner]: "Yazdığım ve tamamladığım romanlar",
+	[Key.novelNoResults]: "Filtrelere uyan roman yok",
+	[Key.novelCounts]: "{count} eser",
+	[Key.novelStatusOngoing]: "Devam ediyor",
+	[Key.novelStatusCompleted]: "Tamamlandı",
+	[Key.novelStatusReleased]: "Yayımlandı",
+	[Key.novelAuthor]: "Yazar",
+	[Key.novelProgress]: "İlerleme",
+
 	[Key.compass]: "Pusula",
 	[Key.compassBanner]:
 		"Sık sık döndüğüm siteler — geliştirme araçları, dokümanlar ve tavşan delikleri.",
@@ -159,6 +169,8 @@ export const tr: Translation = {
 	[Key.seriesCounts]: "seri",
 	[Key.seriesStatusOngoing]: "Devam ediyor",
 	[Key.seriesStatusCompleted]: "Tamamlandı",
+	[Key.seriesStatusProgressing]: "İlerliyor",
+	[Key.seriesStatusReleased]: "Yayınlandı",
 	[Key.seriesPartOf]: "Bu yazı serinin bir parçası",
 	[Key.seriesPart]: "{total} bölümün {index}. bölümü",
 	[Key.seriesPrevInSeries]: "Seride önceki",
@@ -223,6 +235,7 @@ export const tr: Translation = {
 
 	[Key.sidebar]: "Kenar çubuğu",
 	[Key.sidebarSecondary]: "İkincil kenar çubuğu",
+	[Key.navGroupExpand]: "Alt menüyü aç",
 	[Key.musicPlayerTitle]: "Müzik çalar",
 	[Key.musicPrevious]: "Önceki parça",
 	[Key.musicPlay]: "Oynat",

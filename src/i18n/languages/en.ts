@@ -47,6 +47,16 @@ export const en: Translation = {
 	[Key.animeConfigMissingBilibili]: "Bilibili UID not configured",
 	[Key.animeSyncEmpty]: "No anime items found in this source",
 
+	[Key.novel]: "Novels",
+	[Key.novelBanner]: "Novels I am writing and have finished",
+	[Key.novelNoResults]: "No novels match your filters",
+	[Key.novelCounts]: "{count} works",
+	[Key.novelStatusOngoing]: "Ongoing",
+	[Key.novelStatusCompleted]: "Completed",
+	[Key.novelStatusReleased]: "Released",
+	[Key.novelAuthor]: "Author",
+	[Key.novelProgress]: "Progress",
+
 	[Key.compass]: "Compass",
 	[Key.compassBanner]:
 		"Handy sites I keep coming back to — dev tools, docs and rabbit holes.",
@@ -158,6 +168,8 @@ export const en: Translation = {
 	[Key.seriesCounts]: "series",
 	[Key.seriesStatusOngoing]: "Ongoing",
 	[Key.seriesStatusCompleted]: "Completed",
+	[Key.seriesStatusProgressing]: "In Progress",
+	[Key.seriesStatusReleased]: "Released",
 	[Key.seriesPartOf]: "This post is part of the series",
 	[Key.seriesPart]: "Part {index} of {total}",
 	[Key.seriesPrevInSeries]: "Previous in series",
@@ -222,6 +234,7 @@ export const en: Translation = {
 
 	[Key.sidebar]: "Sidebar",
 	[Key.sidebarSecondary]: "Secondary sidebar",
+	[Key.navGroupExpand]: "Expand submenu",
 	[Key.musicPlayerTitle]: "Music player",
 	[Key.musicPrevious]: "Previous track",
 	[Key.musicPlay]: "Play",

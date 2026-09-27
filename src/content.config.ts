@@ -13,6 +13,8 @@ const postsCollection = defineCollection({
 		pinned: z.boolean().optional().default(false),
 		draft: z.boolean().optional().default(false),
 		comment: z.boolean().optional().default(true),
+		/** 正文首行缩进两格（中文排版习惯，`text-indent: 2em`）；只作用于顶层自然段 */
+		textIndent: z.boolean().optional().default(false),
 		description: z.string().optional().default(""),
 		image: z.string().optional().default(""),
 		tags: z.array(z.string()).optional().default([]),
@@ -63,8 +65,22 @@ const seriesCollection = defineCollection({
 	loader: glob({ base: "./src/content/series", pattern: "**/*.md" }),
 	schema: z.object({
 		title: z.string(),
-		status: z.enum(["ongoing", "completed"]).optional().default("ongoing"),
+		/**
+		 * 系列状态（前端 pill 与详情页副标题文案）：
+		 * ongoing 连载中 / completed 已完结 / progressing 进行中 / released 已发布
+		 */
+		status: z
+			.enum(["ongoing", "completed", "progressing", "released"])
+			.optional()
+			.default("ongoing"),
 		defaultCategory: z.string().optional().default(""),
+		/** 系列图标（Iconify 名，如 material-symbols:rocket-launch-rounded）；留空回退主题默认图标 */
+		icon: z.string().optional().default(""),
+		/**
+		 * 系列详情页副标题模板（可选）：支持 `{count}` 文章数量引用
+		 * 留空则沿用默认文案「状态 · N 篇文章」
+		 */
+		subtitle: z.string().optional().default(""),
 	}),
 });
 
@@ -73,6 +89,12 @@ const momentsCollection = defineCollection({
 	schema: z.object({
 		published: z.date(),
 		pinned: z.boolean().optional().default(false),
+		/** 本条动态的发布人名称；留空回退 `config/profile.yaml` 的 name */
+		author: z.string().optional().default(""),
+		/** 本条动态的头像（远端 URL、`/public` 路径或 `src/assets` 本地图）；留空回退 profile.yaml 的 avatar */
+		authorAvatar: z.string().optional().default(""),
+		/** 名称下方的一行小签名；留空不渲染 */
+		statusMessage: z.string().optional().default(""),
 		location: z.string().optional().default(""),
 		/** Mood icon (Iconify name, e.g. `material-symbols:sentiment-excited-outline-rounded`). */
 		mood: z.string().optional().default(""),

@@ -54,7 +54,12 @@ const timeText = $derived(formatDateToYYYYMMDDHHmm(publishedAt));
 				size={40}
 				shape="circle"
 			/>
-			<span class="moment-card__name">{author.name}</span>
+			<span class="moment-card__author-text">
+				<span class="moment-card__name">{author.name}</span>
+				{#if moment.statusMessage}
+					<span class="moment-card__signature">{moment.statusMessage}</span>
+				{/if}
+			</span>
 		</a>
 
 		<div class="moment-card__badges">
@@ -136,6 +141,13 @@ const timeText = $derived(formatDateToYYYYMMDDHHmm(publishedAt));
 			outline: 2px solid var(--primary)
 			outline-offset: 2px
 
+	/* 名称 + 可选小签名：纵向排列，两者都允许省略号截断 */
+	&__author-text
+		display: flex
+		flex-direction: column
+		min-width: 0
+		gap: 0.125rem
+
 	&__name
 		overflow: hidden
 		text-overflow: ellipsis
@@ -143,6 +155,13 @@ const timeText = $derived(formatDateToYYYYMMDDHHmm(publishedAt));
 		color: var(--on-surface)
 		font: var(--m3e-type-title-small)
 		font-weight: 600
+
+	&__signature
+		overflow: hidden
+		text-overflow: ellipsis
+		white-space: nowrap
+		color: var(--on-surface-variant)
+		font: var(--m3e-type-label-small)
 
 	&__badges
 		display: inline-flex

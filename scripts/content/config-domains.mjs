@@ -147,6 +147,12 @@ export const CONFIG_DOMAINS = Object.freeze([
 		module: "@/types/animeConfig",
 	},
 	{
+		key: "novel",
+		file: "novel",
+		type: "NovelConfig",
+		module: "@/types/novelConfig",
+	},
+	{
 		key: "font",
 		file: "font",
 		type: "FontConfig",

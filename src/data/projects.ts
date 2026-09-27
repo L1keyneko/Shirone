@@ -1,49 +1,68 @@
 /**
- * 项目页数据源（纯内容）。
- * 页面展示与筛选规则由 src/config/projectsConfig.ts 控制。
+ * 开源项目数据源
+ * 用于 /projects/ 页面展示
  */
-import type { ProjectItem } from "@/types/projectsConfig";
+
+export type ProjectPhase = "shipped" | "building" | "exploring";
+
+export interface ProjectItem {
+	enable?: boolean;
+	key: string;
+	title: string;
+	summary: string;
+	category: string;
+	phase: ProjectPhase;
+	technologies: string[];
+	icon?: string;
+	cover?: string;
+	coverAlt?: string;
+	featured?: boolean;
+	website?: string;
+	repository?: string;
+	year?: string;
+}
 
 export const projectsData: ProjectItem[] = [
-	{
-		key: "shirone",
-		title: "Shirone",
-		summary:
-			"An Astro blog theme shaped around an M3E component system, expressive content, and resilient client navigation.",
-		category: "theme",
+  {
+		key: "LikeyArrow",
+		title: "cursor-LikeyArrow",
+		summary: "一款简约、透明、泛用的隐式可爱替换鼠标ฅ^. .^ฅ",
+		category: "Design",
 		phase: "building",
-		technologies: ["Astro", "Svelte", "TypeScript", "Tailwind CSS"],
-		icon: "material-symbols:deployed-code-outline-rounded",
-		cover: "/assets/projects/shirone.webp",
-		coverAlt: "Shirone theme homepage preview",
-		featured: true,
-		repository: "https://github.com/LyraVoid/Shirone",
-		year: "2026",
-	},
-	{
-		key: "folkpatch",
-		title: "FolkPatch",
-		summary: "A kernel-level root solution for Android, built on APatch.",
-		category: "android",
-		phase: "building",
-		technologies: ["Kotlin", "APatch", "Android"],
-		icon: "material-symbols:terminal-rounded",
-		repository: "https://github.com/LyraVoid/FolkPatch",
-	},
-	{
-		key: "kernelpatch",
-		title: "KernelPatch",
-		summary:
-			"A kernel patch framework that powers APatch-style root on Android by loading code into the running kernel.",
-		category: "android",
+		technologies: ["PhotoShop", "CDN"],
+		icon: "material-symbols:highlight-mouse-cursor",
+		featured: false,
+		repository: "https://github.com/L1keyneko/cursor-LikeyArrow",
+    website: "../Design/LikeyArrow/",
+		cover: "https://site.lyrikp.art/article/design/LikeyArrow/Previewall.png",
+		year: "2022",
+  },
+  {
+		key: "zed-ini-3dmigoto",
+		title: "zed-ini-3dmigoto",
+		summary: "Zed 编辑器的 ini(3DMigoto) 语法支持 | Highlight support for 3DMigoto in Zed",
+		category: "Zed",
 		phase: "shipped",
-		technologies: ["C", "Linux Kernel", "Android"],
-		icon: "material-symbols:extension-outline-rounded",
-		repository: "https://github.com/lyravoid/KernelPatch",
+		technologies: ["Tree-sitter Query", "Rust"],
+		icon: "material-symbols:terminal-2-rounded",
+		featured: false,
+		repository: "https://github.com/L1keyneko/zed-ini-3dmigoto",
+		year: "2026",
+  },
+  {
+		key: "zed-diff",
+		title: "zed-diff",
+		summary: "让不同工作区文件使用 Zed 进行差异对比的小工具 | Zed diff in different workspace",
+		category: "Zed",
+		phase: "shipped",
+		technologies: ["Rust"],
+		icon: "ri:tools-fill",
+		featured: false,
+		repository: "https://github.com/L1keyneko/zed-diff",
+		year: "2026",
 	},
 ];
 
-/** 获取所有项目数据列表 */
 export function getProjectsList(): ProjectItem[] {
 	return projectsData;
 }

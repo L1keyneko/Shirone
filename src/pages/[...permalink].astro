@@ -308,11 +308,12 @@ const jsonLd = {
                     password={entry.data.password!}
                     scope={scope}
                     hint={entry.data.passwordHint}
+                    textIndent={entry.data.textIndent}
                 >
                     <Content />
                 </EncryptedContent>
             ) : (
-                <Markdown class="mb-6 onload-animation">
+                <Markdown class="mb-6 onload-animation" textIndent={entry.data.textIndent}>
                     <Content />
                 </Markdown>
             )}

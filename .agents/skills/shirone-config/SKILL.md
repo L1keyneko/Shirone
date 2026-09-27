@@ -1,6 +1,6 @@
 ---
 name: shirone-config
-description: Configuring a Shirone blog site - site identity, theme colors, navigation, sidebar, pages, comments, Umami analytics, music, anime sources, fonts, llms.txt, npm package initialization, and build/deploy. Use when enabling or tuning features, changing site behavior, preparing deployment, or configuring a project that consumes shirones.
+description: Configuring a Shirone blog site - site identity, theme colors, navigation, sidebar, pages, comments, Umami analytics, music, anime sources, novel pages, fonts, llms.txt, npm package initialization, and build/deploy. Use when enabling or tuning features, changing site behavior, preparing deployment, or configuring a project that consumes shirones.
 ---
 
 # Shirone 站点配置
@@ -10,7 +10,7 @@ description: Configuring a Shirone blog site - site identity, theme colors, navi
 ## 分层原则:配置管行为,数据管内容
 
 - `src/config/*Config.ts`:页面开关 `enable`、分类顺序 `categories`、单项禁用 `disabledKeys`、排序 `order`、数据源与凭据;
-- `src/data/*.ts`:具体内容实体(`projects.ts`、`skills.ts`、`timeline.ts`、`devices.ts`、`games.ts`、`friends.ts`、`compass.ts`、`anime.ts`、`music.ts`);
+- `src/data/*.ts`:具体内容实体(`projects.ts`、`skills.ts`、`timeline.ts`、`devices.ts`、`games.ts`、`friends.ts`、`compass.ts`、`anime.ts`、`novel.ts`、`music.ts`);
 - 消费方统一从 `@/config` barrel 导入(个别循环依赖模块例外,见配置目录 README)。
 
 ## 常用配置速查
@@ -27,6 +27,7 @@ description: Configuring a Shirone blog site - site identity, theme colors, navi
 | `umamiConfig.ts` | Umami 数据统计：公开分享统计读取，以及可选的官方访问采集脚本 |
 | `musicConfig.ts` | 侧栏音乐(当前默认启用，可手动关闭；local/custom/meting/mixed 四种模式) |
 | `animeConfig.ts` | 追番页数据源:本地 / Bangumi 快照 / Bilibili 快照 |
+| `novelConfig.ts` | 小说界面总开关与标题/描述；条目在 `src/data/novel.ts`；无外部数据源与快照 |
 | `fontConfig.ts` | 字体(构建期 TTF→WOFF2 子集化) |
 | `llmsConfig.ts` | 生成 AI 友好的 `/llms.txt` 与 `/llms-full.txt` |
 | `skillsConfig.ts` 等页面配置 | 技能/项目/时间线/设备/游戏页开关与分类,内容在对应 `src/data/*.ts`；友链、罗盘、番剧和音乐数据也在该目录维护 |

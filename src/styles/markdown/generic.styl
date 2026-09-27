@@ -2,6 +2,18 @@
   img
     border-radius: var(--shape-corner-m)
 
+  /* 首行缩进两格：文章 frontmatter 写 `textIndent: true` 时，页面给容器加 .custom-md--indent。
+     正文段落常被 markdown 插件包在 section 里，因此用后代选择器；
+     列表项、引用块与结构化容器（提示块/折叠/步骤/字段卡片/图片网格）内部段落保持不缩进。 */
+  &.custom-md--indent p
+    text-indent: 2em
+
+  &.custom-md--indent :is(li, blockquote, .m3-admonition, .m3-collapse__content, .m3-steps__content, .m3-field__description, .m3-marker, .image-grid) p
+    text-indent: 0
+
+  &.custom-md--indent p:has(> img:only-child)
+    text-indent: 0
+
   hr
     border: 0
     border-top: 1px solid var(--line-divider)

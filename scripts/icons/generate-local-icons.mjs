@@ -20,11 +20,21 @@ const sourceExtensions = new Set([
 	".tsx",
 ]);
 const iconPattern = /\b(?<prefix>[a-z][a-z0-9-]*):(?<name>[a-z0-9-]+)\b/g;
+/**
+ * 允许打包进离线集合的图标前缀白名单。
+ *
+ * 必须与 `src/config/integrationsConfig.ts` 的 `iconInclude` 成对维护：
+ * 本集合决定 Svelte 端（`@iconify/svelte` 离线组件）能拿到哪些数据，
+ * `iconInclude` 决定 astro-icon 在构建期能解析哪些集合。任一侧漏登记，
+ * 对应渲染路径都会静默缺图标（离线组件不会回退到 Iconify API）。
+ */
 const iconPrefixes = new Set([
 	"fa6-brands",
 	"fa6-regular",
 	"fa6-solid",
+	"lucide",
 	"material-symbols",
+	"ri",
 	"simple-icons",
 ]);
 
