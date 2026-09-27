@@ -5,6 +5,8 @@
  *   一级导航（navBarConfig）+ 可折叠「分类」分组（多级扩展点）。
  * 链接由 Swup 自动接管，点击后收起抽屉；高亮与当前路由/分类筛选同步。
  */
+import I18nKey from "@i18n/i18nKey";
+import { i18n } from "@i18n/translation";
 import Icon from "@iconify/svelte";
 import { resolveNavBarLinks, resolvePageKey } from "@utils/nav-utils";
 import { url } from "@utils/url-utils";
@@ -117,11 +119,23 @@ let drawerEl: HTMLElement | undefined = $state();
 			{#each primaryItems as item (item.value)}
 				{#if item.children}
 					<div class="site-drawer__group">
-						<button type="button" class="site-drawer__group-head" class:site-drawer__item--active={item.children.some((child) => activePrimary === child.value)} onclick={() => toggleGroup(item.value)} aria-expanded={openGroups[item.value] ?? false}>
-							{#if item.icon}<span class="site-drawer__group-icon" aria-hidden="true"><Icon icon={item.icon} /></span>{/if}
-							<span class="site-drawer__group-label">{item.label}</span>
-							<Icon class={openGroups[item.value] ? "site-drawer__group-arrow site-drawer__group-arrow--open" : "site-drawer__group-arrow"} icon="material-symbols:keyboard-arrow-down" />
-						</button>
+						{#if item.href}
+							<div class="site-drawer__group-head site-drawer__group-head--split">
+								<a href={item.href} class="site-drawer__group-link" class:site-drawer__item--active={item.children.some((child) => activePrimary === child.value)} target={item.external ? "_blank" : undefined} rel={item.external ? "noopener noreferrer" : undefined} onclick={handleNavClick}>
+									{#if item.icon}<span class="site-drawer__group-icon" aria-hidden="true"><Icon icon={item.icon} /></span>{/if}
+									<span class="site-drawer__group-label">{item.label}</span>
+								</a>
+								<button type="button" class="site-drawer__group-toggle" aria-expanded={openGroups[item.value] ?? false} aria-label={i18n(I18nKey.navGroupExpand)} onclick={() => toggleGroup(item.value)}>
+									<Icon class={openGroups[item.value] ? "site-drawer__group-arrow site-drawer__group-arrow--open" : "site-drawer__group-arrow"} icon="material-symbols:keyboard-arrow-down" />
+								</button>
+							</div>
+						{:else}
+							<button type="button" class="site-drawer__group-head" class:site-drawer__item--active={item.children.some((child) => activePrimary === child.value)} onclick={() => toggleGroup(item.value)} aria-expanded={openGroups[item.value] ?? false}>
+								{#if item.icon}<span class="site-drawer__group-icon" aria-hidden="true"><Icon icon={item.icon} /></span>{/if}
+								<span class="site-drawer__group-label">{item.label}</span>
+								<Icon class={openGroups[item.value] ? "site-drawer__group-arrow site-drawer__group-arrow--open" : "site-drawer__group-arrow"} icon="material-symbols:keyboard-arrow-down" />
+							</button>
+						{/if}
 						{#if openGroups[item.value]}
 							<div class="site-drawer__group-body">
 								{#each item.children as child (child.value)}
@@ -275,6 +289,56 @@ let drawerEl: HTMLElement | undefined = $state();
 		padding: 0 16px
 		border: none
 		border-radius: var(--shape-corner-full)
+		background: none
+		color: var(--on-surface-variant)
+		cursor: pointer
+		transition: background-color var(--m3e-duration-short) var(--m3e-easing-standard)
+		&:hover
+			background: unquote("color-mix(in oklab, var(--on-surface) 8%, transparent)")
+		&:focus-visible
+			outline: 2px solid var(--secondary)
+			outline-offset: -2px
+
+	/* 分组自身可导航：标签是链接、箭头是独立按钮（两者各自带状态层） */
+	&__group-head--split
+		gap: 0
+		padding: 0
+		background: none
+		cursor: default
+		&:hover
+			background: none
+
+	&__group-link
+		display: flex
+		align-items: center
+		gap: 12px
+		flex: 1
+		min-width: 0
+		min-height: 56px
+		box-sizing: border-box
+		padding: 0 4px 0 16px
+		border-radius: var(--shape-corner-full) 0 0 var(--shape-corner-full)
+		color: var(--on-surface-variant)
+		text-decoration: none
+		transition:
+			background-color var(--m3e-duration-short) var(--m3e-easing-standard),
+			color var(--m3e-duration-short) var(--m3e-easing-standard)
+		&:hover
+			background: unquote("color-mix(in oklab, var(--on-surface) 8%, transparent)")
+		&:focus-visible
+			outline: 2px solid var(--secondary)
+			outline-offset: -2px
+
+	&__group-toggle
+		display: flex
+		align-items: center
+		justify-content: center
+		flex: none
+		width: 48px
+		min-height: 56px
+		padding: 0
+		border: none
+		border-radius: 0 var(--shape-corner-full) var(--shape-corner-full) 0
 		background: none
 		color: var(--on-surface-variant)
 		cursor: pointer

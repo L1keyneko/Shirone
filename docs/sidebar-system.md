@@ -64,6 +64,7 @@ widget 的专属配置（如分类的折叠阈值 `collapseAfter`）只存在于
 | `"friends"` | 友链页（`friends.astro`） |
 | `"moments"` | 动态页（`moments.astro`） |
 | `"anime"` | 番剧页（`anime.astro`） |
+| `"novel"` | 小说界面（`novel.astro`） |
 | `"compass"` | 站点罗盘页（`compass.astro`） |
 | `"skills"` | 技能页（`skills.astro`） |
 | `"projects"` | 项目页（`projects.astro`） |

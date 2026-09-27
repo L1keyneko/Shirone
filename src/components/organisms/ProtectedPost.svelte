@@ -11,10 +11,13 @@ let {
 	payload,
 	scope,
 	hint = "",
+	textIndent = false,
 }: {
 	payload: ProtectedPayload;
 	scope: string;
 	hint?: string;
+	/** 正文首行缩进两格（文章 frontmatter `textIndent`） */
+	textIndent?: boolean;
 } = $props();
 
 let content = $state<string | null>(null);
@@ -36,7 +39,9 @@ $effect(() => {
 	<!-- 解密后的正文渲染容器：继承站点标准 Markdown 样式与动效 -->
 	<div
 		bind:this={containerElement}
-		class="prose dark:prose-invert prose-base !max-w-none custom-md markdown-content mb-6 onload-animation"
+		class="prose dark:prose-invert prose-base !max-w-none custom-md markdown-content mb-6 onload-animation {textIndent
+			? 'custom-md--indent'
+			: ''}"
 	>
 		<!-- biome-ignore lint/security/noDangerouslySetInnerHtml: Decrypted HTML from authenticated Web Crypto AES-GCM -->
 		{@html content}

@@ -6,7 +6,11 @@ import {
 	findUnknownSeriesSlugs,
 	normaliseSeriesSlug,
 	orderSeriesMembers,
+	resolveSeriesIcon,
 	resolveSeriesPostCategory,
+	resolveSeriesSubtitle,
+	SERIES_FALLBACK_ICON,
+	SERIES_FALLBACK_ICON_OUTLINE,
 } from "../src/utils/series-utils.ts";
 
 const member = (slug, published, seriesOrder) => ({
@@ -237,6 +241,70 @@ describe("findUnknownSeriesSlugs", () => {
 				catalog,
 			),
 			[],
+		);
+	});
+});
+
+describe("resolveSeriesIcon", () => {
+	it("配置了图标时原样返回（清理前后空白）", () => {
+		assert.equal(resolveSeriesIcon("ri:music-2-line"), "ri:music-2-line");
+		assert.equal(resolveSeriesIcon("  lucide:book-open  "), "lucide:book-open");
+	});
+
+	it("空值按形态回退到主题默认图标", () => {
+		assert.equal(resolveSeriesIcon(""), SERIES_FALLBACK_ICON);
+		assert.equal(resolveSeriesIcon(undefined), SERIES_FALLBACK_ICON);
+		assert.equal(
+			resolveSeriesIcon(null, "outline"),
+			SERIES_FALLBACK_ICON_OUTLINE,
+		);
+	});
+
+	it("buildSeriesContexts 把系列图标透传给文章上下文", () => {
+		const iconCatalog = new Map([
+			[
+				"demo",
+				{
+					id: "demo",
+					data: {
+						title: "D",
+						status: "ongoing",
+						defaultCategory: "",
+						icon: "ri:music-2-line",
+					},
+				},
+			],
+		]);
+		const contexts = buildSeriesContexts({
+			catalog: iconCatalog,
+			posts: [member("p1", "2026-01-01", 1)],
+		});
+		assert.equal(contexts.get("p1").icon, "ri:music-2-line");
+	});
+});
+
+describe("resolveSeriesSubtitle", () => {
+	const values = { count: 4, countLabel: "篇文章" };
+
+	it("未配置（含仅空白）时回退到「N 篇文章」", () => {
+		assert.equal(resolveSeriesSubtitle("", values), "4 篇文章");
+		assert.equal(resolveSeriesSubtitle(undefined, values), "4 篇文章");
+		assert.equal(resolveSeriesSubtitle("   ", values), "4 篇文章");
+	});
+
+	it("模板里的 {count} 会被替换（可重复出现）", () => {
+		assert.equal(
+			resolveSeriesSubtitle("共 {count} 首歌曲", values),
+			"共 4 首歌曲",
+		);
+		assert.equal(resolveSeriesSubtitle("{count}/{count}", values), "4/4");
+	});
+
+	it("无占位符时按字面量返回；{status} 等未支持的占位符原样保留", () => {
+		assert.equal(resolveSeriesSubtitle("只此一篇", values), "只此一篇");
+		assert.equal(
+			resolveSeriesSubtitle("{count} 篇 · {status}", values),
+			"4 篇 · {status}",
 		);
 	});
 });

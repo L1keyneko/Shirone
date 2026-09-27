@@ -4,9 +4,10 @@
  * 数据驱动：categories 为 { name, href, count? }[]。
  */
 import Button from "@components/atoms/action/Button.svelte";
+import { Icon } from "astro-icon/components";
 
 interface Props {
-	categories: { name: string; href: string; count?: number }[];
+	categories: { name: string; href: string; count?: number; icon?: string }[];
 	class?: string;
 }
 
@@ -24,7 +25,14 @@ const { categories = [], class: className } = Astro.props;
 			class="!px-2 !text-[var(--on-surface)]"
 			
 		>
-			<span class="m3-blog-categorylist__name">{c.name}</span>
+			<span class="m3-blog-categorylist__label">
+				{c.icon && (
+					<span class="m3-blog-categorylist__icon" aria-hidden="true">
+						<Icon name={c.icon} />
+					</span>
+				)}
+				<span class="m3-blog-categorylist__name">{c.name}</span>
+			</span>
 			{c.count !== undefined && (
 				<span class="m3-blog-categorylist__badge">{c.count}</span>
 			)}
@@ -34,6 +42,20 @@ const { categories = [], class: className } = Astro.props;
 
 <style lang="stylus">
 .m3-blog-categorylist
+	&__label
+		display: inline-flex
+		align-items: center
+		gap: var(--m3e-space-2)
+		min-width: 0
+
+	&__icon
+		display: inline-flex
+		flex-shrink: 0
+		color: var(--primary)
+		> :global(svg)
+			width: 1.125rem
+			height: 1.125rem
+
 	&__name
 		overflow: hidden
 		text-overflow: ellipsis

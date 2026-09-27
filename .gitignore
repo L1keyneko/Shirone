@@ -10,6 +10,9 @@ dist/
 content.lock.json
 Shirone-Content/
 
+# materialized content: Obsidian vault metadata stays in the content repository
+src/content/.obsidian/
+
 # generated types
 .astro/
 

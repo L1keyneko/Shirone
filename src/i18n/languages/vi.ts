@@ -47,6 +47,16 @@ export const vi: Translation = {
 	[Key.animeConfigMissingBilibili]: "Chưa cấu hình UID Bilibili",
 	[Key.animeSyncEmpty]: "Không tìm thấy anime nào trong nguồn dữ liệu này",
 
+	[Key.novel]: "Tiểu thuyết",
+	[Key.novelBanner]: "Tiểu thuyết đang viết và đã hoàn thành",
+	[Key.novelNoResults]: "Không có tiểu thuyết phù hợp",
+	[Key.novelCounts]: "{count} tác phẩm",
+	[Key.novelStatusOngoing]: "Đang đăng",
+	[Key.novelStatusCompleted]: "Đã hoàn thành",
+	[Key.novelStatusReleased]: "Đã phát hành",
+	[Key.novelAuthor]: "Tác giả",
+	[Key.novelProgress]: "Tiến độ",
+
 	[Key.compass]: "La bàn",
 	[Key.compassBanner]:
 		"Các trang tôi hay ghé — công cụ lập trình, tài liệu và những hố thỏ.",
@@ -160,6 +170,8 @@ export const vi: Translation = {
 	[Key.seriesCounts]: "loạt bài",
 	[Key.seriesStatusOngoing]: "Đang tiếp tục",
 	[Key.seriesStatusCompleted]: "Đã hoàn thành",
+	[Key.seriesStatusProgressing]: "Đang tiến hành",
+	[Key.seriesStatusReleased]: "Đã phát hành",
 	[Key.seriesPartOf]: "Bài viết này thuộc loạt bài",
 	[Key.seriesPart]: "Phần {index} / {total}",
 	[Key.seriesPrevInSeries]: "Bài trước trong loạt bài",
@@ -223,6 +235,7 @@ export const vi: Translation = {
 
 	[Key.sidebar]: "Thanh bên",
 	[Key.sidebarSecondary]: "Thanh bên phụ",
+	[Key.navGroupExpand]: "Mở menu con",
 	[Key.musicPlayerTitle]: "Trình phát nhạc",
 	[Key.musicPrevious]: "Bài trước",
 	[Key.musicPlay]: "Phát",

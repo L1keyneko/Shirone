@@ -19,19 +19,30 @@ if (!seriesConfig.enable) {
 import { getSeriesCatalog, getSortedPostsList } from "@utils/content-utils";
 import { formatDateToYYYYMMDD } from "@utils/date-utils";
 import { resolveI18nText } from "@utils/i18n-utils";
-import { excerptFromMarkdown, normaliseSeriesSlug } from "@utils/series-utils";
+import {
+	excerptFromMarkdown,
+	normaliseSeriesSlug,
+	resolveSeriesIcon,
+	resolveSeriesSubtitle,
+	type SeriesStatus,
+} from "@utils/series-utils";
+import { SERIES_STATUS_I18N_KEYS } from "@utils/series-status";
 import { getSeriesUrl } from "@utils/url-utils";
 
 interface SeriesIndexItem {
 	slug: string;
 	title: string;
-	status: "ongoing" | "completed";
+	status: SeriesStatus;
 	count: number;
 	latest: Date | null;
 	/** 系列默认分类（可空） */
 	category: string;
 	/** 总览摘要（可空 = 系列未写总览） */
 	overview: string;
+	/** 系列图标（已按形态回退，渲染时直接用） */
+	icon: string;
+	/** 计数文案（frontmatter subtitle 解析结果；无配置时回退「N 篇文章」） */
+	countText: string;
 }
 
 const catalog = await getSeriesCatalog();
@@ -54,6 +65,11 @@ for (const [slug, entity] of catalog) {
 		latest,
 		category: entity.data.defaultCategory.trim(),
 		overview: excerptFromMarkdown(entity.body ?? ""),
+		icon: resolveSeriesIcon(entity.data.icon, "outline"),
+		countText: resolveSeriesSubtitle(entity.data.subtitle, {
+			count: members.length,
+			countLabel: i18n(I18nKey.postsCount),
+		}),
 	});
 }
 items.sort((a, b) => (b.latest?.getTime() ?? 0) - (a.latest?.getTime() ?? 0));
@@ -82,21 +98,17 @@ const pageDescription = seriesConfig.description
 						href={getSeriesUrl(item.slug)}
 					>
 						<div class="series-index__head">
-							<MetaIcon icon="material-symbols:auto-stories-outline-rounded" />
+							<MetaIcon icon={item.icon} />
 							<span class="series-index__title">{item.title}</span>
 							<span
 								class="series-index__status"
 								data-series-status={item.status}
 							>
-								{item.status === "completed"
-									? i18n(I18nKey.seriesStatusCompleted)
-									: i18n(I18nKey.seriesStatusOngoing)}
+								{i18n(SERIES_STATUS_I18N_KEYS[item.status])}
 							</span>
 						</div>
 						<div class="series-index__meta">
-							<span>
-								{item.count} {i18n(I18nKey.postsCount)}
-							</span>
+							<span>{item.countText}</span>
 							{item.latest && (
 								<span>
 									{i18n(I18nKey.statsUpdated)}{" "}
@@ -176,6 +188,14 @@ const pageDescription = seriesConfig.description
 		&[data-series-status="ongoing"]
 			background: var(--primary-container)
 			color: var(--on-primary-container)
+
+		&[data-series-status="progressing"]
+			background: var(--primary-container)
+			color: var(--on-primary-container)
+
+		&[data-series-status="released"]
+		    background: var(--surface-container-highest)
+			color: var(--on-surface-variant)
 
 		&[data-series-status="completed"]
 			background: var(--surface-container-highest)

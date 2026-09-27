@@ -5,6 +5,7 @@ import I18nKey from "@i18n/i18nKey";
 import MainGridLayout from "@layouts/MainGridLayout.astro";
 import { resolveImageAsset } from "@utils/asset-utils";
 import { getSortedMoments } from "@utils/content-utils";
+import { resolveMomentAuthorSource } from "@utils/moment-author";
 import { url } from "@utils/url-utils";
 import { momentsConfig, profileConfig } from "@/config";
 import { resolveI18nText } from "@utils/i18n-utils";
@@ -17,40 +18,80 @@ const pageTitle = resolveI18nText(momentsConfig.title, I18nKey.moments);
 const pageDescription = resolveI18nText(momentsConfig.description, I18nKey.momentsBanner);
 
 const moments = await getSortedMoments();
-const avatarAsset = await resolveImageAsset(profileConfig.avatar ?? "");
-let avatar = typeof avatarAsset === "string" ? avatarAsset : avatarAsset.src;
-let avatarSrcset: string | undefined;
-let avatarWidth: number | undefined;
-let avatarHeight: number | undefined;
-if (typeof avatarAsset !== "string") {
-	const candidates = await Promise.all(
-		[64, 96].map(async (width) => ({
-			width,
-			image: await getImage({
-				src: avatarAsset,
+
+/**
+ * 头像解析：本地资源（`src/assets`）生成 64/96 WebP srcset，远端 URL 与 `/public`
+ * 路径直连；按地址缓存，避免逐条动态重复转码。
+ */
+type ResolvedAvatar = {
+	avatar: string;
+	avatarSrcset?: string;
+	avatarWidth?: number;
+	avatarHeight?: number;
+};
+
+const avatarCache = new Map<string, Promise<ResolvedAvatar>>();
+
+function resolveAvatar(source: string): Promise<ResolvedAvatar> {
+	const cached = avatarCache.get(source);
+	if (cached) return cached;
+
+	const pending = (async (): Promise<ResolvedAvatar> => {
+		const asset = await resolveImageAsset(source);
+		if (typeof asset === "string") return { avatar: asset };
+
+		const candidates = await Promise.all(
+			[64, 96].map(async (width) => ({
 				width,
-				format: "webp",
-				quality: 72,
-			}),
-		})),
-	);
-	avatar = candidates[0].image.src;
-	avatarSrcset = candidates
-		.map(({ image, width }) => `${image.src} ${width}w`)
-		.join(", ");
-	avatarWidth = avatarAsset.width;
-	avatarHeight = avatarAsset.height;
+				image: await getImage({
+					src: asset,
+					width,
+					format: "webp",
+					quality: 72,
+				}),
+			})),
+		);
+
+		return {
+			avatar: candidates[0].image.src,
+			avatarSrcset: candidates
+				.map(({ image, width }) => `${image.src} ${width}w`)
+				.join(", "),
+			avatarWidth: asset.width,
+			avatarHeight: asset.height,
+		};
+	})();
+
+	avatarCache.set(source, pending);
+	return pending;
 }
+
+const defaultAvatar = await resolveAvatar(profileConfig.avatar ?? "");
 const author = {
 	name: profileConfig.name,
-	avatar,
-	avatarSrcset,
-	avatarWidth,
-	avatarHeight,
+	...defaultAvatar,
 	url: url("/about/"),
 };
+
+/**
+ * 逐条动态的作者覆盖：frontmatter 写了 `author` / `authorAvatar` 时生效
+ * （留空项回退站点默认），未覆盖的条目直接复用 `author`。
+ */
+const authorOverrides: Record<string, typeof author> = {};
+
+for (const moment of moments) {
+	const source = resolveMomentAuthorSource(profileConfig, moment);
+	const overridesName = source.name !== author.name;
+	if (!source.usesCustomAvatar && !overridesName) continue;
+
+	const avatarInfo = source.usesCustomAvatar
+		? await resolveAvatar(source.avatar)
+		: defaultAvatar;
+
+	authorOverrides[moment.id] = { ...author, name: source.name, ...avatarInfo };
+}
 ---
 
 <MainGridLayout title={pageTitle} description={pageDescription} page="moments">
-    <MomentSection {moments} {author} title={pageTitle} subtitle={pageDescription} client:visible></MomentSection>
+    <MomentSection {moments} {author} {authorOverrides} title={pageTitle} subtitle={pageDescription} client:visible></MomentSection>
 </MainGridLayout>

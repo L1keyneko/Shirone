@@ -46,6 +46,16 @@ export const ko: Translation = {
 	[Key.animeConfigMissingBilibili]: "Bilibili UID가 설정되지 않았습니다",
 	[Key.animeSyncEmpty]: "이 데이터 소스에 애니메이션 항목이 없습니다",
 
+	[Key.novel]: "소설",
+	[Key.novelBanner]: "집필 중이거나 완결한 소설",
+	[Key.novelNoResults]: "조건에 맞는 소설이 없습니다",
+	[Key.novelCounts]: "총 {count}편",
+	[Key.novelStatusOngoing]: "연재 중",
+	[Key.novelStatusCompleted]: "완결",
+	[Key.novelStatusReleased]: "출간됨",
+	[Key.novelAuthor]: "작가",
+	[Key.novelProgress]: "진행률",
+
 	[Key.compass]: "나침반",
 	[Key.compassBanner]:
 		"자주 찾는 사이트 — 개발 도구, 문서, 그리고 토끼굴 속으로.",
@@ -156,6 +166,8 @@ export const ko: Translation = {
 	[Key.seriesCounts]: "시리즈",
 	[Key.seriesStatusOngoing]: "연재 중",
 	[Key.seriesStatusCompleted]: "완결",
+	[Key.seriesStatusProgressing]: "진행 중",
+	[Key.seriesStatusReleased]: "공개됨",
 	[Key.seriesPartOf]: "이 글은 시리즈의 일부입니다",
 	[Key.seriesPart]: "전체 {total}편 중 {index}편",
 	[Key.seriesPrevInSeries]: "시리즈 내 이전 글",
@@ -220,6 +232,7 @@ export const ko: Translation = {
 
 	[Key.sidebar]: "사이드바",
 	[Key.sidebarSecondary]: "보조 사이드바",
+	[Key.navGroupExpand]: "하위 메뉴 펼치기",
 	[Key.musicPlayerTitle]: "음악 플레이어",
 	[Key.musicPrevious]: "이전 곡",
 	[Key.musicPlay]: "재생",

@@ -55,6 +55,7 @@ themeColor:
 | `about.yaml` | `aboutConfig` 关于页 | `games.yaml` | `gamesConfig` 游戏展示 |
 | `permalink.yaml` | `permalinkConfig` 文章固定链接 | `context-menu.yaml` | `contextMenuConfig` 桌面右键增强 |
 | `i18n.yaml` | `i18nConfig` 多语言与本地化 | `series.yaml` | `seriesConfig` 系列连载 |
+| `novel.yaml` | `novelConfig` 小说界面 | | |
 
 各配置领域的可用字段、默认值与逐项注释均以代码仓中的 `src/config/<domain>Config.ts` 为准。系统同样支持 `.yml` 后缀；空文件与纯注释文件视作不覆盖。
 
@@ -168,7 +169,7 @@ customSections:
 
 ### 2. 完整导航预设清单速查表
 
-主题内置了 17 个开箱即用的页面预设（定义于 `src/config/navBarConfig.ts`）：
+主题内置了 18 个开箱即用的页面预设（定义于 `src/config/navBarConfig.ts`）：
 
 | 预设名称 (`preset`) | 目标路由 | 对应功能与页面 |
 | --- | --- | --- |
@@ -177,6 +178,7 @@ customSections:
 | `Friends` | `/friends/` | 友情链接与博友圈 |
 | `Moments` | `/moments/` | 动态与说说广场 |
 | `Anime` | `/anime/` | 番剧与追番列表 |
+| `Novel` | `/novel/` | 小说界面 |
 | `Compass` | `/compass/` | 常用网址与罗盘导航 |
 | `Skills` | `/skills/` | 个人专业技能清单 |
 | `Projects` | `/projects/` | 开源项目与作品集 |

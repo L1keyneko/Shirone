@@ -46,6 +46,16 @@ export const es: Translation = {
 	[Key.animeConfigMissingBilibili]: "UID de Bilibili no configurado",
 	[Key.animeSyncEmpty]: "No se encontraron animes en esta fuente de datos",
 
+	[Key.novel]: "Novelas",
+	[Key.novelBanner]: "Novelas que escribo y he terminado",
+	[Key.novelNoResults]: "Ninguna novela coincide con los filtros",
+	[Key.novelCounts]: "{count} obras",
+	[Key.novelStatusOngoing]: "En curso",
+	[Key.novelStatusCompleted]: "Completada",
+	[Key.novelStatusReleased]: "Publicada",
+	[Key.novelAuthor]: "Autor",
+	[Key.novelProgress]: "Progreso",
+
 	[Key.compass]: "Brújula",
 	[Key.compassBanner]:
 		"Sitios a los que vuelvo a menudo — herramientas de desarrollo, documentación y madrigueras de conejo.",
@@ -159,6 +169,8 @@ export const es: Translation = {
 	[Key.seriesCounts]: "series",
 	[Key.seriesStatusOngoing]: "En curso",
 	[Key.seriesStatusCompleted]: "Completado",
+	[Key.seriesStatusProgressing]: "En progreso",
+	[Key.seriesStatusReleased]: "Publicado",
 	[Key.seriesPartOf]: "Esta publicación es parte de la serie",
 	[Key.seriesPart]: "Parte {index} de {total}",
 	[Key.seriesPrevInSeries]: "Anterior en la serie",
@@ -223,6 +235,7 @@ export const es: Translation = {
 
 	[Key.sidebar]: "Barra lateral",
 	[Key.sidebarSecondary]: "Barra lateral secundaria",
+	[Key.navGroupExpand]: "Expandir submenú",
 	[Key.musicPlayerTitle]: "Reproductor de música",
 	[Key.musicPrevious]: "Pista anterior",
 	[Key.musicPlay]: "Reproducir",

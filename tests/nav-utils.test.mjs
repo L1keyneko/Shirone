@@ -115,6 +115,28 @@ test("pruneUnavailableNavLinks drops container groups left empty", () => {
 	);
 });
 
+test("pruneUnavailableNavLinks keeps groups but drops their own disabled url", () => {
+	const [group] = resolve(
+		[
+			{
+				name: "更多",
+				url: "/moments/",
+				children: [{ name: "友链", url: "/friends/" }],
+			},
+		],
+		["/moments"],
+	);
+
+	assert.equal(group.name, "更多");
+	assert.equal(group.url, undefined);
+	// 实现用 delete 摘除字段，因此键本身也不应存在
+	assert.equal("url" in group, false);
+	assert.deepEqual(
+		group.children?.map((link) => link.url),
+		["/friends/"],
+	);
+});
+
 test("pruneUnavailableNavLinks keeps every link when nothing is disabled", () => {
 	const links = resolve(
 		[

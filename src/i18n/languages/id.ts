@@ -47,6 +47,16 @@ export const id: Translation = {
 	[Key.animeConfigMissingBilibili]: "UID Bilibili belum dikonfigurasi",
 	[Key.animeSyncEmpty]: "Tidak ada anime yang ditemukan di sumber data ini",
 
+	[Key.novel]: "Novel",
+	[Key.novelBanner]: "Novel yang sedang dan telah saya tulis",
+	[Key.novelNoResults]: "Tidak ada novel yang cocok",
+	[Key.novelCounts]: "{count} karya",
+	[Key.novelStatusOngoing]: "Sedang berlanjut",
+	[Key.novelStatusCompleted]: "Selesai",
+	[Key.novelStatusReleased]: "Diterbitkan",
+	[Key.novelAuthor]: "Penulis",
+	[Key.novelProgress]: "Progres",
+
 	[Key.compass]: "Kompas",
 	[Key.compassBanner]:
 		"Situs yang sering saya kunjungi — alat pengembangan, dokumentasi, dan lubang kelinci.",
@@ -161,6 +171,8 @@ export const id: Translation = {
 	[Key.seriesCounts]: "seri",
 	[Key.seriesStatusOngoing]: "Berjalan",
 	[Key.seriesStatusCompleted]: "Selesai",
+	[Key.seriesStatusProgressing]: "Sedang dikerjakan",
+	[Key.seriesStatusReleased]: "Dirilis",
 	[Key.seriesPartOf]: "Tulisan ini bagian dari seri",
 	[Key.seriesPart]: "Bagian {index} dari {total}",
 	[Key.seriesPrevInSeries]: "Sebelumnya di seri",
@@ -225,6 +237,7 @@ export const id: Translation = {
 
 	[Key.sidebar]: "Bilah samping",
 	[Key.sidebarSecondary]: "Bilah samping sekunder",
+	[Key.navGroupExpand]: "Buka submenu",
 	[Key.musicPlayerTitle]: "Pemutar musik",
 	[Key.musicPrevious]: "Lagu sebelumnya",
 	[Key.musicPlay]: "Putar",

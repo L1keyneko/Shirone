@@ -43,8 +43,13 @@ import {
 
 const ROOT = process.cwd();
 
-/** 遍历内容仓时始终跳过的目录名。 */
-const SKIPPED_DIRECTORIES = new Set([".git", "node_modules"]);
+/**
+ * 遍历内容仓时始终跳过的目录名。
+ *
+ * `.obsidian` 是内容仓本地 vault 的编辑器元数据（工作区布局、插件、主题缓存），
+ * 只服务于在 Obsidian 里的写作体验，既不属于站点内容，也不应随物化进入代码仓。
+ */
+const SKIPPED_DIRECTORIES = new Set([".git", ".obsidian", "node_modules"]);
 
 /**
  * 内容仓根目录下允许存在、但不走挂载表的目录名（不产生告警）。

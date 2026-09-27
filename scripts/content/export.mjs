@@ -100,9 +100,15 @@ const ROOT = process.cwd();
 /** 内容仓中存放导出快照备份的目录（本脚本会确保它进内容仓的 `.gitignore`）。 */
 const BACKUP_DIR = ".export-backup";
 
-/** 遍历两侧目录时始终跳过的目录名。 */
+/**
+ * 遍历两侧目录时始终跳过的目录名。
+ *
+ * `.obsidian` 是编辑器的本地 vault 元数据（工作区布局、插件、主题缓存），
+ * 与 `sync.mjs` 的跳过表保持同一份语义：它不该在代码仓与内容仓之间流动。
+ */
 const SKIPPED_DIRECTORIES = new Set([
 	".git",
+	".obsidian",
 	"node_modules",
 	WORKING_COPY_DIR,
 	BACKUP_DIR,

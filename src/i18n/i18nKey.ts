@@ -45,6 +45,16 @@ enum I18nKey {
 	animeConfigMissingBilibili = "animeConfigMissingBilibili",
 	animeSyncEmpty = "animeSyncEmpty",
 
+	novel = "novel",
+	novelBanner = "novelBanner",
+	novelNoResults = "novelNoResults",
+	novelCounts = "novelCounts",
+	novelStatusOngoing = "novelStatusOngoing",
+	novelStatusCompleted = "novelStatusCompleted",
+	novelStatusReleased = "novelStatusReleased",
+	novelAuthor = "novelAuthor",
+	novelProgress = "novelProgress",
+
 	compass = "compass",
 	compassBanner = "compassBanner",
 	compassNoResults = "compassNoResults",
@@ -149,6 +159,8 @@ enum I18nKey {
 	seriesCounts = "seriesCounts",
 	seriesStatusOngoing = "seriesStatusOngoing",
 	seriesStatusCompleted = "seriesStatusCompleted",
+	seriesStatusProgressing = "seriesStatusProgressing",
+	seriesStatusReleased = "seriesStatusReleased",
 	seriesPartOf = "seriesPartOf",
 	seriesPart = "seriesPart",
 	seriesPrevInSeries = "seriesPrevInSeries",
@@ -212,6 +224,8 @@ enum I18nKey {
 
 	sidebar = "sidebar",
 	sidebarSecondary = "sidebarSecondary",
+	/** 顶栏/抽屉里「可点击分组」的箭头按钮无障碍名称 */
+	navGroupExpand = "navGroupExpand",
 	musicPlayerTitle = "musicPlayerTitle",
 	musicPrevious = "musicPrevious",
 	musicPlay = "musicPlay",

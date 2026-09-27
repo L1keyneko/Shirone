@@ -44,6 +44,16 @@ export const zh_TW: Translation = {
 	[Key.animeConfigMissingBilibili]: "未設定嗶哩嗶哩 UID",
 	[Key.animeSyncEmpty]: "目前資料來源中暫無動畫條目",
 
+	[Key.novel]: "小說",
+	[Key.novelBanner]: "記錄在寫與已完成的小說作品",
+	[Key.novelNoResults]: "沒有符合條件的小說",
+	[Key.novelCounts]: "共 {count} 部",
+	[Key.novelStatusOngoing]: "連載中",
+	[Key.novelStatusCompleted]: "已完結",
+	[Key.novelStatusReleased]: "已發行",
+	[Key.novelAuthor]: "作者",
+	[Key.novelProgress]: "進度",
+
 	[Key.compass]: "站點羅盤",
 	[Key.compassBanner]: "常去的站點 —— 開發工具、文件與各種兔子洞。",
 	[Key.compassNoResults]: "沒有符合條件的站點",
@@ -150,6 +160,8 @@ export const zh_TW: Translation = {
 	[Key.seriesCounts]: "個系列",
 	[Key.seriesStatusOngoing]: "連載中",
 	[Key.seriesStatusCompleted]: "已完結",
+	[Key.seriesStatusProgressing]: "進行中",
+	[Key.seriesStatusReleased]: "已發布",
 	[Key.seriesPartOf]: "本文屬於系列",
 	[Key.seriesPart]: "第 {index} 篇，共 {total} 篇",
 	[Key.seriesPrevInSeries]: "系列內上一篇",
@@ -213,6 +225,7 @@ export const zh_TW: Translation = {
 
 	[Key.sidebar]: "側欄",
 	[Key.sidebarSecondary]: "次側欄",
+	[Key.navGroupExpand]: "展開子選單",
 	[Key.musicPlayerTitle]: "音樂播放器",
 	[Key.musicPrevious]: "上一首",
 	[Key.musicPlay]: "播放",

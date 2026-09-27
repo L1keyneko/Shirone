@@ -47,6 +47,16 @@ export const ja: Translation = {
 	[Key.animeConfigMissingBilibili]: "Bilibili UIDが未設定です",
 	[Key.animeSyncEmpty]: "このデータソースにはアニメがありません",
 
+	[Key.novel]: "小説",
+	[Key.novelBanner]: "執筆中・完結済みの小説",
+	[Key.novelNoResults]: "条件に合う小説がありません",
+	[Key.novelCounts]: "全 {count} 作品",
+	[Key.novelStatusOngoing]: "連載中",
+	[Key.novelStatusCompleted]: "完結",
+	[Key.novelStatusReleased]: "刊行済み",
+	[Key.novelAuthor]: "著者",
+	[Key.novelProgress]: "進捗",
+
 	[Key.compass]: "サイト羅針盤",
 	[Key.compassBanner]:
 		"よく使うサイト —— 開発ツール、ドキュメント、そして迷宮の奥へ。",
@@ -156,6 +166,8 @@ export const ja: Translation = {
 	[Key.seriesCounts]: "シリーズ",
 	[Key.seriesStatusOngoing]: "連載中",
 	[Key.seriesStatusCompleted]: "完結",
+	[Key.seriesStatusProgressing]: "進行中",
+	[Key.seriesStatusReleased]: "公開済み",
 	[Key.seriesPartOf]: "この記事はシリーズの一部です",
 	[Key.seriesPart]: "全 {total} 話中 {index} 話目",
 	[Key.seriesPrevInSeries]: "シリーズ内の前の記事",
@@ -220,6 +232,7 @@ export const ja: Translation = {
 
 	[Key.sidebar]: "サイドバー",
 	[Key.sidebarSecondary]: "サブサイドバー",
+	[Key.navGroupExpand]: "サブメニューを展開",
 	[Key.musicPlayerTitle]: "音楽プレーヤー",
 	[Key.musicPrevious]: "前の曲",
 	[Key.musicPlay]: "再生",

@@ -6,6 +6,7 @@ import { devicesConfig } from "./devicesConfig.ts";
 import { friendsConfig } from "./friendsConfig.ts";
 import { gamesConfig } from "./gamesConfig.ts";
 import { momentsConfig } from "./momentsConfig.ts";
+import { novelConfig } from "./novelConfig.ts";
 import { projectsConfig } from "./projectsConfig.ts";
 import { seriesConfig } from "./seriesConfig.ts";
 import { skillsConfig } from "./skillsConfig.ts";
@@ -20,6 +21,7 @@ export function getDisabledPages(): string[] {
 	if (devicesConfig.enable === false) disabled.push("devices");
 	if (gamesConfig.enable === false) disabled.push("games");
 	if (animeConfig.enable === false) disabled.push("anime");
+	if (novelConfig.enable === false) disabled.push("novel");
 	if (aboutConfig.enable === false) disabled.push("about");
 	if (friendsConfig.enable === false) disabled.push("friends");
 	if (momentsConfig.enable === false) disabled.push("moments");
