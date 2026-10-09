@@ -80,3 +80,12 @@ artifacts/lighthouse/*
 
 # generated AI skills plugin packages
 artifacts/shirone-ai-*
+
+# content repository (materialized by `pnpm content:sync`)
+# Only the mounts the external content repository actually provides are untracked;
+# the full upstream list lives in scripts/content/eject.mjs.
+/src/content/
+/src/data/*.ts
+/src/user/user-config.ts
+/src/config/FooterConfig.html
+/public/images/
