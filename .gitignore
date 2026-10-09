@@ -51,6 +51,8 @@ src/assets/fonts/.subset/
 
 # generated local icon collection
 src/generated/local-icon-collections.ts
+# transient temp file from the icon collection writer (the overwrite rename can hit a file lock on Windows)
+src/generated/*.tmp
 *.iml
 
 # anime snapshot data & downloaded covers
