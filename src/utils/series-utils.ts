@@ -58,6 +58,8 @@ export function resolveSeriesSubtitle(
 export interface SeriesPostRef {
 	slug: string;
 	title: string;
+	/** Canonical URL; absent only when the source entry had none. */
+	url?: string;
 }
 
 /**
@@ -146,6 +148,13 @@ export interface SeriesMemberInput {
 	slug: string;
 	title: string;
 	published: Date;
+	/**
+	 * Canonical URL of the post. Optional because the shape describes the
+	 * minimum a member needs, but every real content entry carries one, and
+	 * series navigation must prefer it: a post with a custom `permalink` or an
+	 * `alias` is not reachable at `/posts/<slug>/`.
+	 */
+	url?: string;
 	/** 所属系列 slug（空 = 不属于任何系列） */
 	series?: string;
 	seriesOrder?: number;
@@ -215,6 +224,7 @@ export function buildSeriesContexts(
 		const refs: SeriesPostRef[] = ordered.map((member) => ({
 			slug: member.slug,
 			title: member.title,
+			...(member.url === undefined ? {} : { url: member.url }),
 		}));
 		ordered.forEach((member, index) => {
 			contexts.set(member.slug, {
