@@ -68,7 +68,9 @@ function resolveIconSetPath(prefix: string): string | null {
 const ICON_PREFIXES: ReadonlySet<string> = new Set<string>([
 	"fa7-brands",
 	"fa7-solid",
+	"lucide",
 	"material-symbols",
+	"ri",
 	"simple-icons",
 ]);
 

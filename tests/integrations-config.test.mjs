@@ -82,10 +82,15 @@ describe("shared integrations config", () => {
 		// "preprocess: vitePreprocess(),"（从 svelte.config.js 误粘过来的）。
 		// Font Awesome ships `fa6-regular` but no `fa7-regular`, so the
 		// regular-weight icon (`address-card`) moved to `fa7-solid`.
+		// `lucide` and `ri` are this site's own additions, carried over from
+		// the old `scripts/icons/generate-local-icons.mjs` allowlist; the
+		// content and `src/data/*.ts` still reference both.
 		assert.deepEqual(Object.keys(iconInclude).sort(), [
 			"fa7-brands",
 			"fa7-solid",
+			"lucide",
 			"material-symbols",
+			"ri",
 			"simple-icons",
 		]);
 		for (const collections of Object.values(iconInclude)) {
